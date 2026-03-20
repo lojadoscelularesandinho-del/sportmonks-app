@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andinho Bet</title>
+</head>
+<body style="background:#0b1220;color:white;font-family:Arial;padding:20px">
+<h2>📊 Jogos do Dia</h2>
+
+<input type="date" id="data">
+<button onclick="buscar()">Buscar</button>
+
+<div id="res" style="margin-top:20px"></div>
+
+<script>
+async function buscar() {
+const d = document.getElementById('data').value;
+const r = await fetch('/api/fixtures?date=' + d);
+const j = await r.json();
+
+let html = '';
+
+if (!j.data || !j.data.length) {
+html = '<p>Nenhum jogo encontrado.</p>';
+} else {
+j.data.forEach(x => {
+html += `
+<div style="margin:10px 0;padding:12px;background:#111827;border-radius:12px">
+<b>${x.name || 'Jogo sem nome'}</b><br>
+<span>Status: ${x.state?.name || ''}</span>
+</div>
+`;
+});
+}
+
+document.getElementById('res').innerHTML = html;
+}
+</script>
+</body>
+</html>
