@@ -9,38 +9,34 @@
 
 body {
 margin: 0;
-background: linear-gradient(180deg, #08111f 0%, #0c1730 100%);
+background: linear-gradient(180deg, #08111f 0%, #0d1933 100%);
 color: #fff;
 font-family: Arial, sans-serif;
-padding: 18px;
+padding: 16px;
 }
 
 .container {
-max-width: 1100px;
+max-width: 1150px;
 margin: 0 auto;
-}
-
-.topo {
-margin-bottom: 20px;
 }
 
 .titulo {
 font-size: 34px;
 font-weight: 800;
-margin: 0 0 6px 0;
+margin-bottom: 6px;
 }
 
 .subtitulo {
 color: #b9c2d0;
-font-size: 14px;
 margin-bottom: 18px;
+font-size: 14px;
 }
 
 .painel {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
 gap: 12px;
-margin-bottom: 18px;
+margin-bottom: 16px;
 }
 
 .box {
@@ -67,17 +63,17 @@ color: #07131f;
 border-radius: 16px;
 padding: 16px;
 font-weight: 800;
-margin-bottom: 20px;
-min-height: 74px;
+margin-bottom: 18px;
+min-height: 72px;
 display: flex;
 align-items: center;
 }
 
 .toolbar {
 display: flex;
-flex-wrap: wrap;
 gap: 10px;
-margin-bottom: 18px;
+flex-wrap: wrap;
+margin-bottom: 14px;
 }
 
 .toolbar input,
@@ -93,27 +89,29 @@ min-width: 180px;
 }
 
 .toolbar button {
-background: #2dd4bf;
-color: #03131a;
 cursor: pointer;
 font-weight: 800;
 }
 
-.toolbar button.sec {
-background: #24325f;
+.btn-primary {
+background: linear-gradient(90deg, #22c55e, #2dd4bf);
+color: #04131b;
+}
+
+.btn-secondary {
+background: #314d9f;
 color: #fff;
 }
 
 .info {
 color: #b9c2d0;
 font-size: 14px;
-margin-bottom: 10px;
+margin-bottom: 12px;
 }
 
 .erro {
-color: #ff9292;
+color: #ff9c9c;
 margin-bottom: 12px;
-font-size: 14px;
 }
 
 .grid {
@@ -127,27 +125,28 @@ background: #101935;
 border: 1px solid #24325f;
 border-radius: 18px;
 padding: 16px;
+overflow: hidden;
+}
+
+.liga-topo {
+color: #9ec3ff;
+font-size: 14px;
+font-weight: 700;
+margin-bottom: 8px;
 }
 
 .linha1 {
 display: flex;
 justify-content: space-between;
-gap: 12px;
+gap: 14px;
 align-items: flex-start;
-margin-bottom: 10px;
 flex-wrap: wrap;
 }
 
-.liga {
-color: #b9c2d0;
-font-size: 13px;
-margin-bottom: 6px;
-}
-
 .jogo {
-font-size: 28px;
+font-size: 25px;
 font-weight: 800;
-line-height: 1.08;
+line-height: 1.1;
 margin-bottom: 10px;
 }
 
@@ -155,7 +154,7 @@ margin-bottom: 10px;
 display: flex;
 flex-wrap: wrap;
 gap: 14px;
-color: #d2dbeb;
+color: #d7dfef;
 font-size: 14px;
 margin-bottom: 12px;
 }
@@ -165,17 +164,21 @@ background: linear-gradient(90deg, #22c55e, #2dd4bf);
 color: #04131b;
 border: none;
 border-radius: 14px;
-padding: 14px 20px;
+padding: 14px 18px;
 font-weight: 800;
 cursor: pointer;
-min-width: 180px;
-font-size: 18px;
+font-size: 17px;
+min-width: 170px;
+}
+
+.pills {
+margin-bottom: 10px;
 }
 
 .pill {
 display: inline-block;
 background: #18244b;
-border: 1px solid #2d4175;
+border: 1px solid #30457d;
 border-radius: 999px;
 padding: 10px 14px;
 margin: 6px 8px 0 0;
@@ -193,15 +196,16 @@ display: none;
 display: block;
 }
 
-.analise h4 {
-margin: 0 0 10px 0;
-font-size: 18px;
+.sec-title {
+font-size: 19px;
+font-weight: 800;
+margin-bottom: 12px;
 }
 
 .analise-grid {
 display: grid;
 grid-template-columns: repeat(2, 1fr);
-gap: 10px;
+gap: 12px;
 margin-bottom: 12px;
 }
 
@@ -214,14 +218,57 @@ padding: 12px;
 
 .analise-box span {
 display: block;
-color: #b9c2d0;
+color: #aebbd6;
 font-size: 12px;
 margin-bottom: 6px;
 }
 
 .analise-box strong {
 font-size: 17px;
-line-height: 1.2;
+line-height: 1.25;
+display: block;
+}
+
+.entrada-lista {
+display: grid;
+grid-template-columns: 1fr;
+gap: 10px;
+margin-top: 10px;
+}
+
+.entrada-item {
+background: #0c1532;
+border: 1px solid #243963;
+border-radius: 14px;
+padding: 12px;
+}
+
+.entrada-top {
+display: flex;
+justify-content: space-between;
+gap: 10px;
+flex-wrap: wrap;
+margin-bottom: 6px;
+}
+
+.entrada-tipo {
+font-size: 15px;
+font-weight: 800;
+}
+
+.entrada-confianca {
+font-size: 14px;
+font-weight: 800;
+color: #ffd97a;
+}
+
+.entrada-desc {
+color: #d7dfef;
+font-size: 14px;
+}
+
+.badges {
+margin-top: 12px;
 }
 
 .badge {
@@ -230,26 +277,25 @@ padding: 8px 12px;
 border-radius: 999px;
 font-size: 13px;
 font-weight: 700;
-margin-right: 8px;
-margin-top: 8px;
+margin: 6px 8px 0 0;
 }
 
 .cons {
 background: #17391f;
-color: #9ff4b3;
-border: 1px solid #2e6940;
+color: #a9f7bb;
+border: 1px solid #356b45;
 }
 
 .mod {
-background: #46360c;
-color: #ffd978;
-border: 1px solid #80621e;
+background: #47370d;
+color: #ffe08a;
+border: 1px solid #856521;
 }
 
 .ag {
 background: #4c1621;
-color: #ff9aac;
-border: 1px solid #8f3048;
+color: #ffafbd;
+border: 1px solid #8c3047;
 }
 
 .vazio {
@@ -260,23 +306,29 @@ padding: 20px;
 color: #b9c2d0;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 920px) {
 .painel {
 grid-template-columns: repeat(2, 1fr);
 }
+
 .analise-grid {
 grid-template-columns: 1fr;
 }
 }
 
 @media (max-width: 600px) {
-body { padding: 14px; }
+.titulo {
+font-size: 28px;
+}
+
 .painel {
 grid-template-columns: 1fr 1fr;
 }
+
 .jogo {
 font-size: 22px;
 }
+
 .btn-analisar {
 width: 100%;
 }
@@ -285,10 +337,8 @@ width: 100%;
 </head>
 <body>
 <div class="container">
-<div class="topo">
 <div class="titulo">📊 Andinho Bet Analytics Pro</div>
-<div class="subtitulo">Jogos do dia com data certa do Brasil, painel rápido e análise automática de entradas.</div>
-</div>
+<div class="subtitulo">Analisador profissional com jogos do dia, confiança por mercado e múltiplas entradas por jogo.</div>
 
 <div class="painel">
 <div class="box">
@@ -315,8 +365,8 @@ width: 100%;
 
 <div class="toolbar">
 <input type="date" id="data" />
-<button id="btnBuscar">Buscar jogos</button>
-<button class="sec" id="btnTop3">Mostrar Top 3</button>
+<button class="btn-primary" id="btnBuscar">Buscar jogos</button>
+<button class="btn-secondary" id="btnTop3">Mostrar Top 3</button>
 </div>
 
 <div class="info" id="info"></div>
@@ -331,24 +381,17 @@ document.getElementById('btnBuscar').addEventListener('click', buscar);
 document.getElementById('btnTop3').addEventListener('click', mostrarTop3);
 
 let jogosCache = [];
-let analisesCache = [];
 
 function formatStatus(status) {
-if (!status) return 'N/A';
-return status;
+return status || 'N/A';
 }
 
-function getLeagueName(jogo) {
-return jogo.league?.name || jogo.league_name || 'Campeonato';
+function formatHora(dataStr) {
+if (!dataStr) return '';
+return dataStr.replace('T', ' ').replace('.000000Z', '').replace('.000Z', '');
 }
 
-function getHora(jogo) {
-const dt = jogo.starting_at || '';
-if (!dt) return '';
-return dt.replace('T', ' ').replace('.000000Z', '').replace('.000Z', '');
-}
-
-function hashScore(texto) {
+function hashSeed(texto) {
 let h = 0;
 for (let i = 0; i < texto.length; i++) {
 h = (h * 31 + texto.charCodeAt(i)) % 100000;
@@ -356,193 +399,133 @@ h = (h * 31 + texto.charCodeAt(i)) % 100000;
 return h;
 }
 
+function detectarCampeonato(jogo) {
+if (jogo.league && jogo.league.name) return jogo.league.name;
+if (jogo.league_name) return jogo.league_name;
+const nome = (jogo.name || '').toLowerCase();
+
+if (nome.includes('napoli') || nome.includes('cagliari')) return 'Itália';
+if (nome.includes('corinthians') || nome.includes('chapecoense')) return 'Brasil';
+if (nome.includes('hannover') || nome.includes('karlsruher')) return 'Alemanha';
+if (nome.includes('odense') || nome.includes('vejle')) return 'Dinamarca';
+if (nome.includes('heracles') || nome.includes('excelsior')) return 'Holanda';
+return 'Campeonato';
+}
+
 function analisarJogo(jogo) {
 const nome = jogo.name || '';
 const status = (jogo.state?.name || '').toLowerCase();
-const seed = hashScore(nome + status + (jogo.starting_at || ''));
+const seed = hashSeed(nome + status + (jogo.starting_at || ''));
 
-let entrada = 'Dupla chance casa';
-let confianca = 64;
-let odd = '1.35';
-let perfil = 'Conservadora';
-let overGols = 'Over 1.5 gols';
-let escanteios = 'Over 8.5 escanteios';
-let cartoes = 'Over 3.5 cartões';
-let agressiva = 'Casa vence';
-let moderada = 'Casa ou empate';
-let segura = 'Over 0.5 gol';
-let mercadoSeguro = 'Dupla chance casa';
-let resumo = 'Jogo equilibrado com leve vantagem para o mandante.';
+let base = 62 + (seed % 8);
 
-if (status.includes('not started')) {
-entrada = 'Dupla chance casa';
-confianca = 67 + (seed % 11);
-odd = (1.28 + ((seed % 20) / 100)).toFixed(2);
-perfil = confianca >= 75 ? 'Conservadora' : 'Moderada';
-overGols = (seed % 2 === 0) ? 'Over 1.5 gols' : 'Under 3.5 gols';
-escanteios = (seed % 3 === 0) ? 'Over 8.5 escanteios' : 'Over 7.5 escanteios';
-cartoes = (seed % 4 === 0) ? 'Over 4.5 cartões' : 'Over 3.5 cartões';
-agressiva = (seed % 2 === 0) ? 'Casa vence' : 'Ambas marcam';
-moderada = 'Casa ou empate';
-segura = 'Over 0.5 gol';
-mercadoSeguro = entrada;
-resumo = 'Pré-jogo: melhor trabalhar mercados seguros e evitar odd alta.';
-} else if (status.includes('1st half') || status.includes('first half')) {
-entrada = 'Over 0.5 gol ao vivo';
-confianca = 72 + (seed % 12);
-odd = (1.35 + ((seed % 22) / 100)).toFixed(2);
-perfil = 'Moderada';
-overGols = 'Over 1.5 gols';
-escanteios = 'Over 8.5 escanteios';
-cartoes = 'Over 3.5 cartões';
-agressiva = 'Próximo gol no jogo';
-moderada = 'Over 0.5 gol HT/FT';
-segura = 'Over 0.5 gol';
-mercadoSeguro = 'Over 0.5 gol';
-resumo = '1º tempo: mercado de gol tende a ser o melhor ponto de entrada.';
-} else if (status.includes('half time') || status.includes('halftime')) {
-entrada = 'Over 0.5 gol no 2º tempo';
-confianca = 79 + (seed % 10);
-odd = (1.30 + ((seed % 15) / 100)).toFixed(2);
-perfil = 'Conservadora';
-overGols = 'Over 1.5 gols';
-escanteios = 'Over 9.5 escanteios';
-cartoes = 'Over 4.5 cartões';
-agressiva = 'Ambas marcam';
-moderada = 'Over 0.5 gol 2T';
-segura = 'Gol no 2º tempo';
-mercadoSeguro = 'Over 0.5 gol no 2º tempo';
-resumo = 'Intervalo: melhor cenário para buscar gol no segundo tempo.';
-} else if (status.includes('2nd half') || status.includes('second half')) {
-entrada = 'Over 1.5 gols';
-confianca = 82 + (seed % 10);
-odd = (1.38 + ((seed % 18) / 100)).toFixed(2);
-perfil = 'Conservadora';
-overGols = 'Over 2.5 gols';
-escanteios = 'Over 9.5 escanteios';
-cartoes = 'Over 4.5 cartões';
-agressiva = 'Próximo gol no jogo';
-moderada = 'Over 0.5 gol';
-segura = 'Over 1.5 gols';
-mercadoSeguro = entrada;
-resumo = '2º tempo: melhor momento para buscar mercado de gols.';
-} else if (status.includes('finished') || status.includes('full time')) {
-entrada = 'Sem entrada (encerrado)';
-confianca = 0;
-odd = '-';
-perfil = 'Encerrado';
-overGols = '-';
-escanteios = '-';
-cartoes = '-';
-agressiva = '-';
-moderada = '-';
-segura = '-';
-mercadoSeguro = '-';
-resumo = 'Jogo encerrado.';
-}
+if (status.includes('not started')) base = 66 + (seed % 8);
+if (status.includes('1st half') || status.includes('first half')) base = 72 + (seed % 8);
+if (status.includes('half time') || status.includes('halftime')) base = 79 + (seed % 8);
+if (status.includes('2nd half') || status.includes('second half')) base = 82 + (seed % 10);
+if (status.includes('finished') || status.includes('full time')) base = 0;
 
-if (confianca > 92) confianca = 92;
+if (base > 92) base = 92;
+
+const entradaSegura = status.includes('2nd half')
+? 'Over 1.5 gols'
+: status.includes('half time')
+? 'Over 0.5 gol no 2º tempo'
+: status.includes('1st half')
+? 'Over 0.5 gol'
+: 'Dupla chance casa';
+
+const entradaModerada = status.includes('2nd half')
+? 'Over 0.5 gol'
+: status.includes('half time')
+? 'Over 1.5 gols'
+: status.includes('1st half')
+? 'Over 1.5 gols'
+: 'Casa ou empate';
+
+const entradaAgressiva = status.includes('2nd half')
+? 'Próximo gol no jogo'
+: status.includes('half time')
+? 'Ambas marcam'
+: status.includes('1st half')
+? 'Gol ainda no 1º tempo'
+: 'Casa vence';
+
+const entradaGols = status.includes('2nd half') ? 'Over 2.5 gols' : 'Over 1.5 gols';
+const entradaEscanteios = status.includes('not started') ? 'Over 8.5 escanteios' : 'Over 9.5 escanteios';
+const entradaCartoes = status.includes('not started') ? 'Over 3.5 cartões' : 'Over 4.5 cartões';
+
+const confiancaSegura = base;
+const confiancaModerada = Math.max(base - 6, 55);
+const confiancaAgressiva = Math.max(base - 12, 50);
+const confiancaGols = Math.max(base - 2, 58);
+const confiancaEscanteios = Math.max(base - 5, 54);
+const confiancaCartoes = Math.max(base - 7, 52);
+
+const melhorEntrada = entradaSegura;
+const melhorConfianca = confiancaSegura;
+const oddIdeal = (1.28 + ((seed % 22) / 100)).toFixed(2);
+
+const perfil = melhorConfianca >= 80 ? 'Conservadora' : (melhorConfianca >= 70 ? 'Moderada' : 'Agressiva');
 
 return {
-entrada,
-confianca,
-odd,
+melhorEntrada,
+melhorConfianca,
+oddIdeal,
 perfil,
-overGols,
-escanteios,
-cartoes,
-agressiva,
-moderada,
-segura,
-mercadoSeguro,
-resumo
+resumo: status.includes('2nd half')
+? '2º tempo costuma oferecer os melhores pontos para explorar gols e pressão final.'
+: status.includes('half time')
+? 'Intervalo é bom para buscar mercados de gol no 2º tempo.'
+: status.includes('1st half')
+? 'No 1º tempo, entradas leves em gols tendem a ser mais seguras.'
+: 'No pré-jogo, mercados conservadores costumam proteger melhor a entrada.',
+entradas: [
+{
+tipo: 'Entrada segura',
+mercado: entradaSegura,
+confianca: confiancaSegura,
+desc: 'Opção mais protegida para trabalhar com menor risco.'
+},
+{
+tipo: 'Entrada moderada',
+mercado: entradaModerada,
+confianca: confiancaModerada,
+desc: 'Boa relação entre segurança e retorno.'
+},
+{
+tipo: 'Entrada agressiva',
+mercado: entradaAgressiva,
+confianca: confiancaAgressiva,
+desc: 'Mercado mais ousado para quem aceita maior risco.'
+},
+{
+tipo: 'Mercado de gols',
+mercado: entradaGols,
+confianca: confiancaGols,
+desc: 'Leitura focada em tendência de gols na partida.'
+},
+{
+tipo: 'Mercado de escanteios',
+mercado: entradaEscanteios,
+confianca: confiancaEscanteios,
+desc: 'Indicado para jogos com ritmo e pressão ofensiva.'
+},
+{
+tipo: 'Mercado de cartões',
+mercado: entradaCartoes,
+confianca: confiancaCartoes,
+desc: 'Boa opção para partidas de maior contato e disputa.'
+}
+]
 };
-}
-
-function renderJogos(lista, top3 = false) {
-const resDiv = document.getElementById('res');
-
-if (!lista.length) {
-resDiv.innerHTML = '<div class="vazio">Nenhum jogo encontrado.</div>';
-return;
-}
-
-const renderLista = top3 ? [...lista].sort((a, b) => b._analise.confianca - a._analise.confianca).slice(0, 3) : lista;
-
-let html = '';
-
-renderLista.forEach((jogo, idx) => {
-const analise = jogo._analise;
-const analiseId = 'analise_' + idx + '_' + Math.floor(Math.random() * 99999);
-
-html += `
-<div class="card">
-<div class="linha1">
-<div>
-<div class="liga">${getLeagueName(jogo)}</div>
-<div class="jogo">${jogo.name || 'Jogo sem nome'}</div>
-<div class="meta">
-<span>🕒 ${getHora(jogo)}</span>
-<span>📊 Status: ${formatStatus(jogo.state?.name)}</span>
-</div>
-</div>
-<div>
-<button class="btn-analisar" onclick="toggleAnalise('${analiseId}')">Analisar jogo</button>
-</div>
-</div>
-
-<div class="pill">🎯 Melhor entrada: <b>${analise.entrada}</b></div>
-<div class="pill">🔥 Confiança: <b>${analise.confianca}%</b></div>
-<div class="pill">💸 Odd ideal: <b>${analise.odd}</b></div>
-
-<div id="${analiseId}" class="analise">
-<h4>Resumo da análise</h4>
-
-<div class="analise-grid">
-<div class="analise-box">
-<span>Mercado mais seguro</span>
-<strong>${analise.mercadoSeguro}</strong>
-</div>
-<div class="analise-box">
-<span>Perfil da entrada</span>
-<strong>${analise.perfil}</strong>
-</div>
-<div class="analise-box">
-<span>Gols</span>
-<strong>${analise.overGols}</strong>
-</div>
-<div class="analise-box">
-<span>Escanteios</span>
-<strong>${analise.escanteios}</strong>
-</div>
-<div class="analise-box">
-<span>Cartões</span>
-<strong>${analise.cartoes}</strong>
-</div>
-<div class="analise-box">
-<span>Resumo</span>
-<strong>${analise.resumo}</strong>
-</div>
-</div>
-
-<span class="badge cons">Segura: ${analise.segura}</span>
-<span class="badge mod">Moderada: ${analise.moderada}</span>
-<span class="badge ag">Agressiva: ${analise.agressiva}</span>
-</div>
-</div>
-`;
-});
-
-resDiv.innerHTML = html;
 }
 
 function atualizarPainel(lista) {
 const total = lista.length;
-const fortes = lista.filter(j => j._analise.confianca >= 80).length;
-const melhor = total ? Math.max(...lista.map(j => j._analise.confianca)) : 0;
-const melhorJogo = total
-? [...lista].sort((a, b) => b._analise.confianca - a._analise.confianca)[0]
-: null;
+const fortes = lista.filter(j => j._analise.melhorConfianca >= 80).length;
+const melhor = total ? Math.max(...lista.map(j => j._analise.melhorConfianca)) : 0;
+const melhorJogo = total ? [...lista].sort((a, b) => b._analise.melhorConfianca - a._analise.melhorConfianca)[0] : null;
 
 document.getElementById('totalJogos').textContent = total;
 document.getElementById('entradasFortes').textContent = fortes;
@@ -550,8 +533,99 @@ document.getElementById('melhorConfianca').textContent = melhor + '%';
 document.getElementById('fusoAtual').textContent = 'Brasil';
 
 document.getElementById('melhorEntradaDia').textContent = melhorJogo
-? `🔥 Melhor entrada do dia: ${melhorJogo.name} → ${melhorJogo._analise.entrada} (${melhorJogo._analise.confianca}%)`
+? `🔥 Melhor entrada do dia: ${melhorJogo.name} → ${melhorJogo._analise.melhorEntrada} (${melhorJogo._analise.melhorConfianca}%)`
 : '🔥 Melhor entrada do dia: nenhum jogo encontrado';
+}
+
+function renderJogos(lista, apenasTop3 = false) {
+const resDiv = document.getElementById('res');
+
+if (!lista.length) {
+resDiv.innerHTML = '<div class="vazio">Nenhum jogo encontrado.</div>';
+return;
+}
+
+const jogosRender = apenasTop3
+? [...lista].sort((a, b) => b._analise.melhorConfianca - a._analise.melhorConfianca).slice(0, 3)
+: lista;
+
+let html = '';
+
+jogosRender.forEach((jogo, idx) => {
+const a = jogo._analise;
+const aid = `analise_${idx}_${Math.floor(Math.random() * 99999)}`;
+const campeonato = detectarCampeonato(jogo);
+
+html += `
+<div class="card">
+<div class="liga-topo">🏆 ${campeonato}</div>
+
+<div class="linha1">
+<div>
+<div class="jogo">${jogo.name || 'Jogo sem nome'}</div>
+<div class="meta">
+<span>🕒 ${formatHora(jogo.starting_at)}</span>
+<span>📊 Status: ${formatStatus(jogo.state?.name)}</span>
+</div>
+</div>
+<div>
+<button class="btn-analisar" onclick="toggleAnalise('${aid}')">Analisar jogo</button>
+</div>
+</div>
+
+<div class="pills">
+<div class="pill">🎯 Melhor entrada: <b>${a.melhorEntrada}</b></div>
+<div class="pill">🔥 Confiança: <b>${a.melhorConfianca}%</b></div>
+<div class="pill">💸 Odd ideal: <b>${a.oddIdeal}</b></div>
+</div>
+
+<div id="${aid}" class="analise">
+<div class="sec-title">Resumo da análise</div>
+
+<div class="analise-grid">
+<div class="analise-box">
+<span>Mercado principal</span>
+<strong>${a.melhorEntrada}</strong>
+</div>
+<div class="analise-box">
+<span>Perfil da entrada</span>
+<strong>${a.perfil}</strong>
+</div>
+<div class="analise-box">
+<span>Odd ideal</span>
+<strong>${a.oddIdeal}</strong>
+</div>
+<div class="analise-box">
+<span>Resumo</span>
+<strong>${a.resumo}</strong>
+</div>
+</div>
+
+<div class="sec-title">Entradas sugeridas</div>
+<div class="entrada-lista">
+${a.entradas.map(ent => `
+<div class="entrada-item">
+<div class="entrada-top">
+<div class="entrada-tipo">${ent.tipo}</div>
+<div class="entrada-confianca">Confiança: ${ent.confianca}%</div>
+</div>
+<div class="entrada-desc"><b>${ent.mercado}</b></div>
+<div class="entrada-desc">${ent.desc}</div>
+</div>
+`).join('')}
+</div>
+
+<div class="badges">
+<span class="badge cons">Segura: ${a.entradas[0].mercado} (${a.entradas[0].confianca}%)</span>
+<span class="badge mod">Moderada: ${a.entradas[1].mercado} (${a.entradas[1].confianca}%)</span>
+<span class="badge ag">Agressiva: ${a.entradas[2].mercado} (${a.entradas[2].confianca}%)</span>
+</div>
+</div>
+</div>
+`;
+});
+
+resDiv.innerHTML = html;
 }
 
 async function buscar() {
@@ -583,8 +657,6 @@ jogosCache = jogos.map(jogo => ({
 _analise: analisarJogo(jogo)
 }));
 
-analisesCache = jogosCache;
-
 atualizarPainel(jogosCache);
 renderJogos(jogosCache, false);
 } catch (e) {
@@ -594,13 +666,12 @@ erroDiv.innerHTML = 'Erro ao carregar jogos.';
 }
 
 function mostrarTop3() {
-renderJogos(analisesCache, true);
+renderJogos(jogosCache, true);
 }
 
 function toggleAnalise(id) {
-const box = document.getElementById(id);
-if (!box) return;
-box.classList.toggle('show');
+const el = document.getElementById(id);
+if (el) el.classList.toggle('show');
 }
 
 buscar();
