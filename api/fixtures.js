@@ -11,15 +11,15 @@ const token = process.env.SPORTMONKS_TOKEN;
 const date = req.query.date || new Date().toISOString().split('T')[0];
 
 if (!token) {
-return res.status(500).json({ error: 'SPORTMONKS_TOKEN não configurado' });
+return res.status(500).json({ ok: false, error: 'SPORTMONKS_TOKEN não configurado' });
 }
 
-const timezone = 'America/Fortaleza'; // ou America/Sao_Paulo
+const timezone = 'America/Sao_Paulo';
 const perPage = 50;
 
 let page = 1;
-let allData = [];
 let hasMore = true;
+let allData = [];
 
 try {
 while (hasMore) {
@@ -39,7 +39,6 @@ return res.status(response.status).json(json);
 }
 
 allData = allData.concat(json.data || []);
-
 hasMore = Boolean(json.pagination?.has_more);
 page += 1;
 }
