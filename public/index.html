@@ -1,31 +1,91 @@
-<script>
-async function buscar() {
-const dataInput = document.getElementById("data").value;
-const resDiv = document.getElementById("res");
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jogos do Dia</title>
+<style>
+body{
+background:#0b1220;
+color:#fff;
+font-family:Arial,sans-serif;
+padding:20px;
+margin:0;
+}
+input,button{
+padding:10px;
+border-radius:8px;
+border:none;
+font-size:16px;
+}
+button{
+cursor:pointer;
+font-weight:bold;
+margin-left:8px;
+}
+.card{
+margin:10px 0;
+padding:12px;
+background:#111827;
+border-radius:12px;
+}
+.erro{
+color:#ff8080;
+margin-top:12px;
+}
+</style>
+</head>
+<body>
+<h2>📊 Jogos do Dia</h2>
 
-resDiv.innerHTML = "Carregando...";
+<input type="date" id="data">
+<button id="btnBuscar">Buscar</button>
+
+<div id="erro" class="erro"></div>
+<div id="res" style="margin-top:20px"></div>
+
+<script>
+const hoje = new Date().toISOString().split('T')[0];
+document.getElementById('data').value = hoje;
+
+document.getElementById('btnBuscar').addEventListener('click', buscar);
+
+async function buscar() {
+const d = document.getElementById('data').value;
+const resDiv = document.getElementById('res');
+const erroDiv = document.getElementById('erro');
+
+resDiv.innerHTML = 'Carregando...';
+erroDiv.innerHTML = '';
 
 try {
-const response = await fetch(`/api/fixtures?date=${dataInput}`);
+const response = await fetch('/api/fixtures?date=' + d);
 const data = await response.json();
 
-const jogos = data.raw?.data || [];
+const jogos = data.raw?.data || data.data || [];
 
 if (!jogos.length) {
-resDiv.innerHTML = "Nenhum jogo encontrado.";
+resDiv.innerHTML = 'Nenhum jogo encontrado.';
 return;
 }
 
-resDiv.innerHTML = jogos.map(jogo => `
-<div style="margin-bottom:15px;padding:10px;border:1px solid #333;border-radius:8px">
-<b>${jogo.name}</b><br>
-🕒 ${jogo.starting_at}<br>
+let html = '';
+jogos.forEach(jogo => {
+html += `
+<div class="card">
+<b>${jogo.name || 'Jogo sem nome'}</b><br>
+🕒 ${jogo.starting_at || ''}<br>
 📊 Status: ${jogo.state?.name || 'N/A'}
 </div>
-`).join("");
+`;
+});
 
+resDiv.innerHTML = html;
 } catch (e) {
-resDiv.innerHTML = "Erro ao carregar jogos.";
+resDiv.innerHTML = '';
+erroDiv.innerHTML = 'Erro ao carregar jogos.';
 }
 }
 </script>
+</body>
+</html>
