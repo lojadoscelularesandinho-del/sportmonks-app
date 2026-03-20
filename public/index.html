@@ -1,40 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andinho Bet</title>
-</head>
-<body style="background:#0b1220;color:white;font-family:Arial;padding:20px">
-<h2>📊 Jogos do Dia</h2>
+export default async function handler(req, res) {
+res.setHeader('Access-Control-Allow-Origin', '*');
 
-<input type="date" id="data">
-<button onclick="buscar()">Buscar</button>
+const token = process.env.SPORTMONKS_TOKEN;
+const date = req.query.date || new Date().toISOString().split('T')[0];
 
-<div id="res" style="margin-top:20px"></div>
+try {
+const url = `https://api.sportmonks.com/v3/football/fixtures/date/${date}?api_token=${token}`;
 
-<script>
-async function buscar() {
-const d = document.getElementById('data').value;
-const r = await fetch('/api/fixtures?date=' + d);
-const j = await r.json();
+const response = await fetch(url);
+const data = await response.json();
 
-let html = '';
+return res.status(200).json(data);
 
-if (!j.data || !j.data.length) {
-html = '<p>Nenhum jogo encontrado.</p>';
-} else {
-j.data.forEach(x => {
-html += `
-<div style="margin:10px 0;padding:12px;background:#111827;border-radius:12px">
-<b>${x.name || 'Jogo sem nome'}</b><br>
-<span>Status: ${x.state?.name || ''}</span>
-</div>
-`;
-});
+} catch (e) {
+return res.status(500).json({ error: 'Erro ao buscar jogos' });
 }
-
-document.getElementById('res').innerHTML = html;
 }
-</script>
-</body>
-</html>
