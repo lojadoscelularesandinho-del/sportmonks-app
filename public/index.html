@@ -1,18 +1,43 @@
-export default async function handler(req, res) {
-res.setHeader('Access-Control-Allow-Origin', '*');
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Jogos do Dia</title>
+</head>
 
-const token = process.env.SPORTMONKS_TOKEN;
-const date = req.query.date || new Date().toISOString().split('T')[0];
+<body style="background:#0b1220;color:white;font-family:Arial;padding:20px">
 
-try {
-const url = `https://api.sportmonks.com/v3/football/fixtures/date/${date}?api_token=${token}`;
+<h2>📊 Jogos do Dia</h2>
 
-const response = await fetch(url);
-const data = await response.json();
+<input type="date" id="data">
+<button onclick="buscar()">Buscar</button>
 
-return res.status(200).json(data);
+<div id="res" style="margin-top:20px"></div>
 
-} catch (e) {
-return res.status(500).json({ error: 'Erro ao buscar jogos' });
+<script>
+const hoje = new Date().toISOString().split('T')[0];
+document.getElementById('data').value = hoje;
+
+async function buscar() {
+const d = document.getElementById('data').value;
+
+const r = await fetch('/api/fixtures?date=' + d);
+const j = await r.json();
+
+if (!j.data || j.data.length === 0) {
+document.getElementById('res').innerHTML = 'Nenhum jogo encontrado.';
+return;
 }
+
+let html = '';
+
+j.data.forEach(x => {
+html += `<p>${x.name}</p>`;
+});
+
+document.getElementById('res').innerHTML = html;
 }
+</script>
+
+</body>
+</html>
