@@ -1,3 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jogos do Dia</title>
+<style>
+body {
+background: #0b1220;
+color: white;
+font-family: Arial, sans-serif;
+padding: 20px;
+margin: 0;
+}
+input, button {
+padding: 10px;
+border-radius: 8px;
+border: none;
+font-size: 16px;
+}
+button {
+cursor: pointer;
+font-weight: bold;
+margin-left: 8px;
+}
+.topo {
+display: flex;
+gap: 8px;
+align-items: center;
+flex-wrap: wrap;
+margin-bottom: 16px;
+}
+.card {
+margin: 10px 0;
+padding: 12px;
+background: #111827;
+border-radius: 12px;
+border: 1px solid #243041;
+}
+.muted {
+color: #b9c2d0;
+font-size: 14px;
+}
+.erro {
+color: #ff8080;
+margin-top: 12px;
+}
+</style>
+</head>
+<body>
+<h2>📊 Jogos do Dia</h2>
+
+<div class="topo">
+<input type="date" id="data">
+<button id="btnBuscar">Buscar</button>
+</div>
+
+<div id="info" class="muted"></div>
+<div id="erro" class="erro"></div>
+<div id="res" style="margin-top:20px"></div>
+
+<script>
+const hoje = new Date().toISOString().split('T')[0];
+document.getElementById('data').value = hoje;
+document.getElementById('btnBuscar').addEventListener('click', buscar);
+
+async function buscar() {
+const d = document.getElementById('data').value;
+const resDiv = document.getElementById('res');
+const erroDiv = document.getElementById('erro');
+const infoDiv = document.getElementById('info');
+
+resDiv.innerHTML = 'Carregando...';
+erroDiv.innerHTML = '';
+infoDiv.innerHTML = '';
+
+try {
+const response = await fetch('/api/fixtures?date=' + d);
+const json = await response.json();
+
+if (!json.ok) {
+resDiv.innerHTML = '';
+erroDiv.innerHTML = json.error || json.message || 'Erro ao buscar jogos.';
+return;
+}
+
+const jogos = json.data || [];
+infoDiv.innerHTML = `Data: ${json.date} • Fuso: ${json.timezone} • Jogos encontrados: ${json.count}`;
+
+if (!jogos.length) {
+resDiv.innerHTML = 'Nenhum jogo encontrado.';
+return;
+}
+
 let html = '';
 
 jogos.forEach(jogo => {
