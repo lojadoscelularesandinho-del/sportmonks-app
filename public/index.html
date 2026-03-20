@@ -16,7 +16,7 @@ padding: 16px;
 }
 
 .container {
-max-width: 1150px;
+max-width: 1180px;
 margin: 0 auto;
 }
 
@@ -70,22 +70,19 @@ align-items: center;
 }
 
 .toolbar {
-display: flex;
+display: grid;
+grid-template-columns: 180px 1fr 1fr auto auto;
 gap: 10px;
-flex-wrap: wrap;
 margin-bottom: 14px;
 }
 
 .toolbar input,
+.toolbar select,
 .toolbar button {
 padding: 12px 14px;
 border-radius: 12px;
 border: none;
 font-size: 16px;
-}
-
-.toolbar input {
-min-width: 180px;
 }
 
 .toolbar button {
@@ -298,6 +295,12 @@ color: #ffafbd;
 border: 1px solid #8c3047;
 }
 
+.live {
+background: #4b1621;
+color: #ffb5c0;
+border: 1px solid #8b3047;
+}
+
 .vazio {
 background: #101935;
 border: 1px dashed #2b3b6f;
@@ -306,9 +309,13 @@ padding: 20px;
 color: #b9c2d0;
 }
 
-@media (max-width: 920px) {
+@media (max-width: 980px) {
 .painel {
 grid-template-columns: repeat(2, 1fr);
+}
+
+.toolbar {
+grid-template-columns: 1fr 1fr;
 }
 
 .analise-grid {
@@ -332,13 +339,17 @@ font-size: 22px;
 .btn-analisar {
 width: 100%;
 }
+
+.toolbar {
+grid-template-columns: 1fr;
+}
 }
 </style>
 </head>
 <body>
 <div class="container">
 <div class="titulo">📊 Andinho Bet Analytics Pro</div>
-<div class="subtitulo">Analisador profissional com jogos do dia, confiança por mercado e múltiplas entradas por jogo.</div>
+<div class="subtitulo">Analisador com jogos do dia, filtros, top 3 e múltiplas entradas com confiança.</div>
 
 <div class="painel">
 <div class="box">
@@ -365,6 +376,15 @@ width: 100%;
 
 <div class="toolbar">
 <input type="date" id="data" />
+<select id="filtroCampeonato">
+<option value="">Todos os campeonatos</option>
+</select>
+<select id="filtroStatus">
+<option value="">Todos os status</option>
+<option value="live">Ao vivo</option>
+<option value="not_started">Não iniciados</option>
+<option value="finished">Encerrados</option>
+</select>
 <button class="btn-primary" id="btnBuscar">Buscar jogos</button>
 <button class="btn-secondary" id="btnTop3">Mostrar Top 3</button>
 </div>
@@ -377,10 +397,14 @@ width: 100%;
 <script>
 const hoje = new Date().toISOString().split('T')[0];
 document.getElementById('data').value = hoje;
+
 document.getElementById('btnBuscar').addEventListener('click', buscar);
 document.getElementById('btnTop3').addEventListener('click', mostrarTop3);
+document.getElementById('filtroCampeonato').addEventListener('change', aplicarFiltros);
+document.getElementById('filtroStatus').addEventListener('change', aplicarFiltros);
 
 let jogosCache = [];
+let jogosFiltrados = [];
 
 function formatStatus(status) {
 return status || 'N/A';
@@ -402,6 +426,7 @@ return h;
 function detectarCampeonato(jogo) {
 if (jogo.league && jogo.league.name) return jogo.league.name;
 if (jogo.league_name) return jogo.league_name;
+
 const nome = (jogo.name || '').toLowerCase();
 
 if (nome.includes('napoli') || nome.includes('cagliari')) return 'Itália';
@@ -409,7 +434,26 @@ if (nome.includes('corinthians') || nome.includes('chapecoense')) return 'Brasil
 if (nome.includes('hannover') || nome.includes('karlsruher')) return 'Alemanha';
 if (nome.includes('odense') || nome.includes('vejle')) return 'Dinamarca';
 if (nome.includes('heracles') || nome.includes('excelsior')) return 'Holanda';
+if (nome.includes('amiens') || nome.includes('le mans')) return 'França';
+
 return 'Campeonato';
+}
+
+function classificarStatus(jogo) {
+const s = (jogo.state?.name || '').toLowerCase();
+
+if (
+s.includes('1st half') ||
+s.includes('2nd half') ||
+s.includes('half time') ||
+s.includes('live') ||
+s.includes('extra time')
+) return 'live';
+
+if (s.includes('not started') || s.includes('scheduled')) return 'not_started';
+if (s.includes('finished') || s.includes('full time')) return 'finished';
+
+return 'other';
 }
 
 function analisarJogo(jogo) {
@@ -465,7 +509,6 @@ const confiancaCartoes = Math.max(base - 7, 52);
 const melhorEntrada = entradaSegura;
 const melhorConfianca = confiancaSegura;
 const oddIdeal = (1.28 + ((seed % 22) / 100)).toFixed(2);
-
 const perfil = melhorConfianca >= 80 ? 'Conservadora' : (melhorConfianca >= 70 ? 'Moderada' : 'Agressiva');
 
 return {
@@ -521,6 +564,18 @@ desc: 'Boa opção para partidas de maior contato e disputa.'
 };
 }
 
+function preencherFiltroCampeonatos(lista) {
+const select = document.getElementById('filtroCampeonato');
+const atual = select.value;
+
+const campeonatos = [...new Set(lista.map(j => detectarCampeonato(j)).filter(Boolean))].sort();
+
+select.innerHTML = '<option value="">Todos os campeonatos</option>' +
+campeonatos.map(c => `<option value="${c}">${c}</option>`).join('');
+
+if (campeonatos.includes(atual)) select.value = atual;
+}
+
 function atualizarPainel(lista) {
 const total = lista.length;
 const fortes = lista.filter(j => j._analise.melhorConfianca >= 80).length;
@@ -541,7 +596,7 @@ function renderJogos(lista, apenasTop3 = false) {
 const resDiv = document.getElementById('res');
 
 if (!lista.length) {
-resDiv.innerHTML = '<div class="vazio">Nenhum jogo encontrado.</div>';
+resDiv.innerHTML = '<div class="vazio">Nenhum jogo encontrado com esse filtro.</div>';
 return;
 }
 
@@ -555,6 +610,7 @@ jogosRender.forEach((jogo, idx) => {
 const a = jogo._analise;
 const aid = `analise_${idx}_${Math.floor(Math.random() * 99999)}`;
 const campeonato = detectarCampeonato(jogo);
+const statusGrupo = classificarStatus(jogo);
 
 html += `
 <div class="card">
@@ -566,6 +622,7 @@ html += `
 <div class="meta">
 <span>🕒 ${formatHora(jogo.starting_at)}</span>
 <span>📊 Status: ${formatStatus(jogo.state?.name)}</span>
+${statusGrupo === 'live' ? '<span class="badge live">AO VIVO</span>' : ''}
 </div>
 </div>
 <div>
@@ -628,6 +685,20 @@ ${a.entradas.map(ent => `
 resDiv.innerHTML = html;
 }
 
+function aplicarFiltros() {
+const campeonato = document.getElementById('filtroCampeonato').value;
+const status = document.getElementById('filtroStatus').value;
+
+jogosFiltrados = jogosCache.filter(jogo => {
+const okCamp = !campeonato || detectarCampeonato(jogo) === campeonato;
+const okStatus = !status || classificarStatus(jogo) === status;
+return okCamp && okStatus;
+});
+
+atualizarPainel(jogosFiltrados);
+renderJogos(jogosFiltrados, false);
+}
+
 async function buscar() {
 const d = document.getElementById('data').value;
 const resDiv = document.getElementById('res');
@@ -657,8 +728,8 @@ jogosCache = jogos.map(jogo => ({
 _analise: analisarJogo(jogo)
 }));
 
-atualizarPainel(jogosCache);
-renderJogos(jogosCache, false);
+preencherFiltroCampeonatos(jogosCache);
+aplicarFiltros();
 } catch (e) {
 resDiv.innerHTML = '';
 erroDiv.innerHTML = 'Erro ao carregar jogos.';
@@ -666,7 +737,7 @@ erroDiv.innerHTML = 'Erro ao carregar jogos.';
 }
 
 function mostrarTop3() {
-renderJogos(jogosCache, true);
+renderJogos(jogosFiltrados.length ? jogosFiltrados : jogosCache, true);
 }
 
 function toggleAnalise(id) {
